@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>_WIN32;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32;GLEW_STATIC;SB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>_WIN32;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32;GLEW_STATIC;SB_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;glew.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -148,7 +148,6 @@
   <ItemGroup>
     <ClInclude Include="sb\Common.hpp" />
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
-    <ClInclude Include="sb\graphics\gl\GLError.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sb\graphics\DisplayManager.cpp" />
