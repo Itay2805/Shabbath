@@ -2,15 +2,14 @@
 
 SB_SUBMODULE(graphics, gl)
 
-Texture::Texture(GLenum type, int storagewidth, int storageheight)
-	: type(type)
+Texture::Texture(size_t storagewidth, size_t storageheight, GLenum type)
 {
 	glCreateTextures(type, 1, &texture);
 	glTextureStorage2D(texture, 1, GL_RGBA8, storagewidth, storageheight);
 }
 
-Texture::Texture(int storagewidth, int storageheight)
-	: Texture(GL_TEXTURE_2D, storagewidth, storageheight)
+Texture::Texture()
+	: Texture(1024, 1024)
 {
 }
 
@@ -19,7 +18,7 @@ Texture::~Texture()
 	glDeleteTextures(1, &texture);
 }
 
-void Texture::LoadData(int width, int height, void * data, GLenum format, GLenum type)
+void Texture::LoadData(size_t width, size_t height, void * data, GLenum format, GLenum type)
 {
 	this->width = width;
 	this->height = height;
