@@ -4,8 +4,13 @@ SB_MODULE(graphics)
 
 GLFWwindow* DisplayManager::window = nullptr;
 
+#define WIDTH 960
+#define HEIGHT 540
+
 void DisplayManager::CreateDisplay()
 {
+
+
 
 	glfwSetErrorCallback(DisplayManager::glfwErrorCall);
 
@@ -16,7 +21,7 @@ void DisplayManager::CreateDisplay()
 
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 	
-	window = glfwCreateWindow(960, 540, "Shabbath", nullptr, nullptr);
+	window = glfwCreateWindow(WIDTH, HEIGHT, "Shabbath", nullptr, nullptr);
 	if (!window) {
 		glfwTerminate();
 		std::cout << "Error creating glfw!" << std::endl;
@@ -36,6 +41,9 @@ void DisplayManager::CreateDisplay()
 	std::cout << "\tRenderer: " << glGetString(GL_RENDERER) << std::endl;
 	std::cout << "\tVersion: " << glGetString(GL_VERSION) << std::endl;
 
+	glViewport(0, 0, WIDTH, HEIGHT);
+	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
+
 #ifdef SB_DEBUG
 	std::cout << "Enabling OpenGL debbuging" << std::endl;
 
@@ -49,6 +57,7 @@ void DisplayManager::CreateDisplay()
 
 void DisplayManager::UpdateDisplay()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

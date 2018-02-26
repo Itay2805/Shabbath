@@ -9,7 +9,7 @@ int main() {
 
 	DisplayManager::CreateDisplay();
 	
-	Texture texture(1024, 1024);
+	Texture texture;
 
 	GLuint* image_data = new GLuint[960 * 540];
 	for (int i = 0; i<960 * 540; i++) {
