@@ -2,6 +2,8 @@
 
 SB_MODULE(graphics)
 
+GLFWwindow* DisplayManager::window = nullptr;
+
 void DisplayManager::CreateDisplay()
 {
 
@@ -16,6 +18,10 @@ void DisplayManager::CreateDisplay()
 	}
 
 	glfwMakeContextCurrent(window);
+
+	if (!glewInit()) {
+		return;
+	}
 }
 
 void DisplayManager::UpdateDisplay()

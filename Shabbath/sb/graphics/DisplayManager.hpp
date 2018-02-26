@@ -2,6 +2,7 @@
 
 #include "../Common.hpp"
 
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
 SB_MODULE(graphics)
