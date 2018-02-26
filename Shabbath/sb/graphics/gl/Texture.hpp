@@ -17,6 +17,8 @@ public:
 
 	void LoadData(size_t width, size_t height, void* data, GLenum format = GL_RGBA, GLenum type = GL_UNSIGNED_BYTE);
 	
+	void Bind();
+
 	static Texture LoadFromFile(std::string path);
 
 	inline size_t GetWidth() const { return width; }

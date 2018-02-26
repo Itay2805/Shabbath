@@ -25,5 +25,10 @@ void Texture::LoadData(size_t width, size_t height, void * data, GLenum format, 
 	glTextureSubImage2D(texture, 0, 0, 0, width, height, format, type, data);
 }
 
+void Texture::Bind()
+{
+	glBindImageTexture(0, texture, 0, false, 0, GL_READ_ONLY, GL_RGBA8);
+}
+
 SB_SUBMODULE_END
 

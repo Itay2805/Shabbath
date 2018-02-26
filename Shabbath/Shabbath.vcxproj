@@ -146,16 +146,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="sb\graphics\gl\Buffer.hpp" />
     <ClInclude Include="sb\Common.hpp" />
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
+    <ClInclude Include="sb\graphics\gl\Buffer.hpp" />
+    <ClInclude Include="sb\graphics\gl\ShaderProgram.hpp" />
     <ClInclude Include="sb\graphics\gl\Texture.hpp" />
-    <ClInclude Include="sb\graphics\gl\VertexBuffer.h" />
+    <ClInclude Include="sb\graphics\gl\VertexArray.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sb\graphics\gl\Buffer.cpp" />
     <ClCompile Include="sb\graphics\DisplayManager.cpp" />
+    <ClCompile Include="sb\graphics\gl\Buffer.cpp" />
+    <ClCompile Include="sb\graphics\gl\ShaderProgram.cpp" />
     <ClCompile Include="sb\graphics\gl\Texture.cpp" />
+    <ClCompile Include="sb\graphics\gl\VertexArray.cpp" />
     <ClCompile Include="sb\Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
