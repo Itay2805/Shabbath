@@ -18,6 +18,7 @@ void VertexArray::Bind() const
 
 void VertexArray::AddBuffer(const Buffer & buffer, int index)
 {
+	Bind();
 	glVertexArrayVertexBuffer(array, index, buffer.GetBuffer(), 0, static_cast<GLsizei>(buffer.GetStride()));
 	int attrib = 0;
 	size_t offset = 0;

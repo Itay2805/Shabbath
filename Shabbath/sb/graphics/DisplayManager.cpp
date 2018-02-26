@@ -55,9 +55,13 @@ void DisplayManager::CreateDisplay()
 
 }
 
-void DisplayManager::UpdateDisplay()
+void DisplayManager::ClearDisplay()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void DisplayManager::UpdateDisplay()
+{
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

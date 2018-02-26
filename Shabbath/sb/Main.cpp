@@ -20,9 +20,9 @@ int main() {
 
 	VertexArray arr;
 
-	GLfloat data[8] = {
-		-1,-1, -1, 1,
-		1,-1,  1, 1,
+	GLfloat data[12] = {
+		-0.5,-0.5, -0.5, 0.5, 0.5,-0.5,
+		0.5,-0.5, 0.5, 0.5, -0.5, 0.5,
 	};
 	Buffer buf(data, sizeof(data));
 	buf.Push<float>(2);
@@ -49,11 +49,12 @@ void main(void) {
 	program.Link();
 
 	while (!DisplayManager::ShouldClose()) {
-		
+		DisplayManager::ClearDisplay();
+
 		program.Bind();
 		texture.Bind();
 		glUniform1i(0, 0);
-		glDrawArrays(GL_TRIANGLES, 0, 4);
+		glDrawArrays(GL_TRIANGLES, 0, 8);
 
 		DisplayManager::UpdateDisplay();
 	}

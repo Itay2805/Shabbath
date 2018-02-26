@@ -14,5 +14,10 @@ Buffer::~Buffer()
 	glDeleteBuffers(1, &buffer);
 }
 
+void Buffer::Bind()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+}
+
 SB_SUBMODULE_END
 

@@ -10,6 +10,7 @@ private:
 
 public:
 	static void CreateDisplay();
+	static void ClearDisplay();
 	static void UpdateDisplay();
 	static bool ShouldClose();
 
