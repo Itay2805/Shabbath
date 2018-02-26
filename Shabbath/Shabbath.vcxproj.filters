@@ -21,12 +21,18 @@
     <ClInclude Include="sb\Common.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sb\graphics\gl\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sb\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sb\graphics\DisplayManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sb\graphics\gl\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
