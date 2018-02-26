@@ -2,9 +2,6 @@
 
 #include "../Common.hpp"
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-
 SB_MODULE(graphics)
 
 class DisplayManager {
@@ -15,6 +12,10 @@ public:
 	static void CreateDisplay();
 	static void UpdateDisplay();
 	static bool ShouldClose();
+
+private:
+	static void _stdcall glDebugCall(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+	static void glfwErrorCall(int id, const char * message);
 
 };
 

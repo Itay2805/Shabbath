@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="sb\Common.hpp" />
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
+    <ClInclude Include="sb\graphics\gl\GLError.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sb\graphics\DisplayManager.cpp" />

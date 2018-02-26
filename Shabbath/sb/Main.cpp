@@ -5,7 +5,6 @@ int main() {
 
 	DisplayManager::CreateDisplay();
 	while (!DisplayManager::ShouldClose()) {
-		glClear(GL_COLOR_BUFFER_BIT);
 		DisplayManager::UpdateDisplay();
 	}
 }
