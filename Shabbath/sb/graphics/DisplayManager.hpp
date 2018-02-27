@@ -13,6 +13,7 @@ public:
 	static void ClearDisplay();
 	static void UpdateDisplay();
 	static bool ShouldClose();
+	static void CloseDisplay();
 
 private:
 	static void _stdcall glDebugCall(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);

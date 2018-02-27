@@ -14,14 +14,13 @@ class AnimatedSprite {
 private:
 	GLuint pbos[2];
 	GLuint texture;
-	GLubyte* imageData = 0;
 	ASStreamingMode mode;
 	size_t width, height;
 
 	int index = 0;
 
 public:
-	AnimatedSprite(size_t width, size_t height, ASStreamingMode mode = ASStreamingMode::MAPPING);
+	AnimatedSprite(size_t width, size_t height, ASStreamingMode mode = ASStreamingMode::DOUBLE_PBO);
 	~AnimatedSprite();
 
 	void UpdateTexture(const void* imageData);

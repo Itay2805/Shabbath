@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="sb\Common.hpp" />
+    <ClInclude Include="sb\graphics\BatchRenderer.hpp" />
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
     <ClInclude Include="sb\graphics\gl\Buffer.hpp" />
     <ClInclude Include="sb\graphics\gl\ExtensionManager.h" />

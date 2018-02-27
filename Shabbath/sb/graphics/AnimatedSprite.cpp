@@ -11,7 +11,7 @@ AnimatedSprite::AnimatedSprite(size_t width, size_t height, ASStreamingMode mode
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	if (mode != ASStreamingMode::MAPPING) {
@@ -59,14 +59,7 @@ void AnimatedSprite::UpdateTexture(const void * imageData)
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[index]);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[nextIndex]);
-		glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, nullptr, GL_STREAM_DRAW);
-		GLubyte* ptr = (GLubyte*)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
-		if (ptr) {
-			memcpy(ptr, imageData, width * height * 4);
-			glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
-		}else {
-			std::cout << "Could not map buffer!" << std::endl;
-		}
+		glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, imageData, GL_STREAM_DRAW);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 	}
 	else {

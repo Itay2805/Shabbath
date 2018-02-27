@@ -11,10 +11,10 @@ int main() {
 
 	DisplayManager::CreateDisplay();
 	
-	AnimatedSprite sprite(512, 512, ASStreamingMode::MAPPING);
+	AnimatedSprite sprite(1024, 1024);
 
-	GLuint* image_data = new GLuint[512 * 512];
-	for (int i = 0; i<512 * 512; i++) {
+	GLuint* image_data = new GLuint[1024 * 1024];
+	for (int i = 0; i<1024 * 1024; i++) {
 		image_data[i] = rand();
 	}
 	sprite.UpdateTexture(image_data);
@@ -56,20 +56,24 @@ void main(void) {
 	}
 
 	int tick = 0;
+	float avgTransferTime = 0;
 
 	while (!DisplayManager::ShouldClose()) {
-		tick++;
 		DisplayManager::ClearDisplay();
 
-		if (tick % 5 == 0) {
-			for (int i = 0; i<512 * 512; i++) {
-				image_data[i] = rand();
-			}
-			double time = glfwGetTime();
-			sprite.UpdateTexture(image_data);
-			double took = glfwGetTime() - time;
-			std::cout << "[Debug] Transfer and update time: " << took << std::endl;
+		for (int i = 0; i<1024 * 1024; i++) {
+			image_data[i] = rand();
 		}
+		double time = glfwGetTime();
+		sprite.UpdateTexture(image_data);
+		double took = glfwGetTime() - time;
+		avgTransferTime += took;
+
+		if (tick % 60 == 0) {
+			std::cout << "[Debug] Transfer and update time: " << avgTransferTime / 60.0f << std::endl;
+			avgTransferTime = 0;
+		}
+
 
 		program.Bind();
 		sprite.BindTexture();
@@ -77,7 +81,10 @@ void main(void) {
 		glDrawArrays(GL_TRIANGLES, 0, 8);
 
 		DisplayManager::UpdateDisplay();
+		tick++;
 	}
+
+	DisplayManager::CloseDisplay();
 
 	system("PAUSE");
 }

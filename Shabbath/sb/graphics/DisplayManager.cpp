@@ -71,6 +71,11 @@ bool DisplayManager::ShouldClose()
 	return glfwWindowShouldClose(window);
 }
 
+void DisplayManager::CloseDisplay()
+{
+	glfwTerminate();
+}
+
 void _stdcall DisplayManager::glDebugCall(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar * message, const void * userParam)
 {
 	std::string sourceStr, severtityStr, typeStr;
