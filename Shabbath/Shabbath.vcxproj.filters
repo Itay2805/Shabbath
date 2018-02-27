@@ -33,6 +33,15 @@
     <ClInclude Include="sb\graphics\gl\ShaderProgram.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sb\graphics\gl\sbgl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sb\graphics\gl\PBO.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sb\graphics\gl\ExtensionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sb\Main.cpp">
@@ -51,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sb\graphics\gl\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sb\graphics\gl\PBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

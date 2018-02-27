@@ -2,7 +2,7 @@
 
 SB_SUBMODULE(graphics, gl)
 
-Buffer::Buffer(void* data, size_t size)
+Buffer::Buffer(const void* data, size_t size)
 	: size(size)
 {
 	glCreateBuffers(1, &buffer);

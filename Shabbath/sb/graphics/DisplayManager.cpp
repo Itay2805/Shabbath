@@ -10,8 +10,6 @@ GLFWwindow* DisplayManager::window = nullptr;
 void DisplayManager::CreateDisplay()
 {
 
-
-
 	glfwSetErrorCallback(DisplayManager::glfwErrorCall);
 
 	if (!glfwInit()) {

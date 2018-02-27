@@ -20,7 +20,7 @@ private:
 	size_t stride;
 
 public:
-	Buffer(void* data, size_t size);
+	Buffer(const void* data, size_t size);
 	~Buffer();
 
 	template<typename A>
