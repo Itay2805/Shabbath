@@ -5,8 +5,11 @@
 SB_SUBMODULE(graphics, gl)
 
 class ExtensionManager {
+private:
 
-
+public:
+	static void Init() {
+	}
 
 };
 

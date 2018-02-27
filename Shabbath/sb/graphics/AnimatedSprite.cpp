@@ -48,21 +48,32 @@ void AnimatedSprite::UpdateTexture(const void * imageData)
 	int nextIndex = 0;
 	if (mode != ASStreamingMode::MAPPING) {
 		if (mode == ASStreamingMode::PBO) {
+			// Single PBO mode
 			index = nextIndex = 0;
 		}
 		else if (mode == ASStreamingMode::DOUBLE_PBO) {
+			// Dual PBO mode, increment the current index first then get the next index
 			index = (index + 1) % 2;
 			nextIndex = (index + 1) % 2;
 		}
-
+		// bind the texture and PBO
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[index]);
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+		// copy pixels from PBO to texture object
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+		
+		// bind PBO to update pixel values
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[nextIndex]);
+
+		// update the new data, this is async operation
 		glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, imageData, GL_STREAM_DRAW);
+		
+		// unbind the pixel buffer to make sure all texture operations are like normal
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 	}
 	else {
+		// copy pixels from system memory to texture object
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 	}

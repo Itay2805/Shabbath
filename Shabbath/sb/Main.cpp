@@ -11,7 +11,7 @@ int main() {
 
 	DisplayManager::CreateDisplay();
 	
-	AnimatedSprite sprite(1024, 1024);
+	AnimatedSprite sprite(1024, 1024, ASStreamingMode::DOUBLE_PBO);
 
 	GLuint* image_data = new GLuint[1024 * 1024];
 	for (int i = 0; i<1024 * 1024; i++) {
