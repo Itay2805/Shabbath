@@ -150,16 +150,17 @@
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
     <ClInclude Include="sb\graphics\gl\Buffer.hpp" />
     <ClInclude Include="sb\graphics\gl\ExtensionManager.h" />
-    <ClInclude Include="sb\graphics\gl\PBO.hpp" />
+    <ClInclude Include="sb\graphics\gl\ExtensionManager.hpp" />
+    <ClInclude Include="sb\graphics\AnimatedSprite.hpp" />
     <ClInclude Include="sb\graphics\gl\sbgl.h" />
     <ClInclude Include="sb\graphics\gl\ShaderProgram.hpp" />
     <ClInclude Include="sb\graphics\gl\Texture.hpp" />
     <ClInclude Include="sb\graphics\gl\VertexArray.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sb\graphics\AnimatedSprite.cpp" />
     <ClCompile Include="sb\graphics\DisplayManager.cpp" />
     <ClCompile Include="sb\graphics\gl\Buffer.cpp" />
-    <ClCompile Include="sb\graphics\gl\PBO.cpp" />
     <ClCompile Include="sb\graphics\gl\ShaderProgram.cpp" />
     <ClCompile Include="sb\graphics\gl\Texture.cpp" />
     <ClCompile Include="sb\graphics\gl\VertexArray.cpp" />

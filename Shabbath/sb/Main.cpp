@@ -3,26 +3,27 @@
 #include "graphics\gl\ShaderProgram.hpp"
 #include "graphics\gl\VertexArray.hpp"
 
+#include "graphics\AnimatedSprite.hpp"
+
 int main() {
 	using namespace sb::graphics;
 	using namespace sb::graphics::gl;
 
 	DisplayManager::CreateDisplay();
 	
-	Texture texture;
+	AnimatedSprite sprite(512, 512, ASStreamingMode::MAPPING);
 
-	GLuint* image_data = new GLuint[960 * 540];
-	for (int i = 0; i<960 * 540; i++) {
+	GLuint* image_data = new GLuint[512 * 512];
+	for (int i = 0; i<512 * 512; i++) {
 		image_data[i] = rand();
 	}
-	texture.LoadData(960, 540, image_data);
-	delete[] image_data;
+	sprite.UpdateTexture(image_data);
 
 	VertexArray arr;
 
 	GLfloat data[12] = {
-		-0.5,-0.5, -0.5, 0.5, 0.5,-0.5,
-		0.5,-0.5, 0.5, 0.5, -0.5, 0.5,
+		-1.0,-1.0, -1.0, 1.0, 1.0,-1.0,
+		1.0,-1.0, 1.0, 1.0, -1.0, 1.0,
 	};
 	Buffer buf(data, sizeof(data));
 	buf.Push<float>(2);
@@ -32,30 +33,51 @@ int main() {
 	program.AttachShader(GL_VERTEX_SHADER, R"(
 #version 450 core
 layout(location = 0) in vec2 coord;
+out vec2 uvCoord;
 void main(void) {
 	gl_Position = vec4(coord, 0.0, 1.0);
+	uvCoord = coord;
 }
 )");
 
 	program.AttachShader(GL_FRAGMENT_SHADER, R"(
 #version 450 core
-readonly restrict uniform layout(rgba8) image2D image;
+uniform sampler2D tex;
+in vec2 uvCoord;
 layout(location = 0) out vec4 color;
 void main(void) {
-	color = imageLoad(image, ivec4(gl_FragCoord).xy);
+	color = texture2D(tex, uvCoord);
 }
 )");
 
-	program.Link();
+	if (!program.Link()) {
+		system("PAUSE");
+		return 0;
+	}
+
+	int tick = 0;
 
 	while (!DisplayManager::ShouldClose()) {
+		tick++;
 		DisplayManager::ClearDisplay();
 
+		if (tick % 5 == 0) {
+			for (int i = 0; i<512 * 512; i++) {
+				image_data[i] = rand();
+			}
+			double time = glfwGetTime();
+			sprite.UpdateTexture(image_data);
+			double took = glfwGetTime() - time;
+			std::cout << "[Debug] Transfer and update time: " << took << std::endl;
+		}
+
 		program.Bind();
-		texture.Bind();
-		glUniform1i(0, 0);
+		sprite.BindTexture();
+		// glUniform1i(0, 0);
 		glDrawArrays(GL_TRIANGLES, 0, 8);
 
 		DisplayManager::UpdateDisplay();
 	}
+
+	system("PAUSE");
 }

@@ -4,4 +4,3 @@
 #include "ShaderProgram.hpp"
 #include "Texture.hpp"
 #include "VertexArray.hpp"
-#include "PBO.hpp"

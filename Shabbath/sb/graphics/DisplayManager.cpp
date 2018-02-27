@@ -42,6 +42,8 @@ void DisplayManager::CreateDisplay()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
 #ifdef SB_DEBUG
 	std::cout << "Enabling OpenGL debbuging" << std::endl;
 
