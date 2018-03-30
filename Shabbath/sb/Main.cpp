@@ -5,6 +5,8 @@
 
 #include "graphics\AnimatedSprite.hpp"
 
+#include "memory\MemoryManager.h"
+
 int main() {
 	using namespace sb::graphics;
 	using namespace sb::graphics::gl;
@@ -13,7 +15,7 @@ int main() {
 	
 	AnimatedSprite sprite(1024, 1024, ASStreamingMode::DOUBLE_PBO);
 
-	GLuint* image_data = new GLuint[1024 * 1024];
+	GLuint* image_data = MemoryManager::Get()->AllocateStatic<GLuint>(1024 * 1024);
 	for (int i = 0; i<1024 * 1024; i++) {
 		image_data[i] = rand();
 	}
@@ -36,7 +38,14 @@ layout(location = 0) in vec2 coord;
 out vec2 uvCoord;
 void main(void) {
 	gl_Position = vec4(coord, 0.0, 1.0);
-	uvCoord = coord;
+	vec2 c = vec2(0.0, 0.0);
+	if(coord.x > 0.0) {
+		c.x = 1.0;
+	}
+	if(coord.y > 0.0) {
+		c.y = 1.0;
+	}
+	uvCoord = c;
 }
 )");
 
@@ -58,6 +67,10 @@ void main(void) {
 	int tick = 0;
 	float avgTransferTime = 0;
 
+	ASStreamingMode mode = ASStreamingMode::DOUBLE_PBO;
+
+	std::cout << "[DOUBLE_PBO] Starting PBO benchmark " << std::endl;
+	
 	while (!DisplayManager::ShouldClose()) {
 		DisplayManager::ClearDisplay();
 
@@ -69,11 +82,27 @@ void main(void) {
 		double took = glfwGetTime() - time;
 		avgTransferTime += took;
 
-		if (tick % 60 == 0) {
-			std::cout << "[Debug] Transfer and update time: " << avgTransferTime / 60.0f << std::endl;
+		if (tick % (60 * 60) == 0 && tick != 0) {
+			if (mode == ASStreamingMode::DOUBLE_PBO) {
+				std::cout << "[DOUBLE_PBO] Transfer and update time: " << avgTransferTime / (60.0f * 60.0f) << std::endl;
+				mode = ASStreamingMode::MAPPING;
+				sprite.UpdateStreamingMode(mode);
+			}
+			else if (mode == ASStreamingMode::MAPPING) {
+				std::cout << "[MAPPING] Transfer and update time: " << avgTransferTime / (60.0f * 60.0f) << std::endl;
+				mode = ASStreamingMode::PBO;
+				sprite.UpdateStreamingMode(mode);
+			}
+			else if (mode == ASStreamingMode::PBO) {
+				std::cout << "[PBO] Transfer and update time: " << avgTransferTime / (60.0f * 60.0f) << std::endl;
+				mode = (ASStreamingMode)-1;
+			}
+			else {
+				std::cout << "[Debug] Done";
+				DisplayManager::CloseDisplay();
+			}
 			avgTransferTime = 0;
 		}
-
 
 		program.Bind();
 		sprite.BindTexture();
@@ -83,8 +112,6 @@ void main(void) {
 		DisplayManager::UpdateDisplay();
 		tick++;
 	}
-
-	DisplayManager::CloseDisplay();
 
 	system("PAUSE");
 }

@@ -147,16 +147,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="sb\Common.hpp" />
-    <ClInclude Include="sb\graphics\BatchRenderer.hpp" />
     <ClInclude Include="sb\graphics\DisplayManager.hpp" />
     <ClInclude Include="sb\graphics\gl\Buffer.hpp" />
     <ClInclude Include="sb\graphics\gl\ExtensionManager.h" />
     <ClInclude Include="sb\graphics\gl\ExtensionManager.hpp" />
     <ClInclude Include="sb\graphics\AnimatedSprite.hpp" />
-    <ClInclude Include="sb\graphics\gl\sbgl.h" />
+    <ClInclude Include="sb\graphics\gl\sbgl.hpp" />
     <ClInclude Include="sb\graphics\gl\ShaderProgram.hpp" />
     <ClInclude Include="sb\graphics\gl\Texture.hpp" />
     <ClInclude Include="sb\graphics\gl\VertexArray.hpp" />
+    <ClInclude Include="sb\memory\MemoryManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sb\graphics\AnimatedSprite.cpp" />

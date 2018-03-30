@@ -26,6 +26,8 @@ public:
 	void UpdateTexture(const void* imageData);
 	void BindTexture();
 
+	void UpdateStreamingMode(ASStreamingMode mode);
+
 private:
 
 };

@@ -43,6 +43,35 @@ AnimatedSprite::~AnimatedSprite()
 	glDeleteTextures(1, &texture);
 }
 
+void AnimatedSprite::UpdateStreamingMode(ASStreamingMode newmode) {
+	if (mode != ASStreamingMode::MAPPING) {
+		if (mode == ASStreamingMode::DOUBLE_PBO) {
+			glDeleteBuffers(2, pbos);
+		}
+		else if (mode == ASStreamingMode::PBO) {
+			glDeleteBuffers(1, pbos);
+		}
+	}
+	
+	mode = newmode;
+
+	if (mode != ASStreamingMode::MAPPING) {
+		if (mode == ASStreamingMode::DOUBLE_PBO) {
+			glGenBuffers(2, pbos);
+			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[0]);
+			glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, nullptr, GL_STREAM_DRAW);
+			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[1]);
+			glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, nullptr, GL_STREAM_DRAW);
+		}
+		else if (mode == ASStreamingMode::PBO) {
+			glGenBuffers(1, pbos);
+			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbos[0]);
+			glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4, nullptr, GL_STREAM_DRAW);
+		}
+		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+	}
+}
+
 void AnimatedSprite::UpdateTexture(const void * imageData)
 {
 	int nextIndex = 0;

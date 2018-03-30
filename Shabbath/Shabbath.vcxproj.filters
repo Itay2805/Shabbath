@@ -33,9 +33,6 @@
     <ClInclude Include="sb\graphics\gl\ShaderProgram.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sb\graphics\gl\sbgl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sb\graphics\gl\ExtensionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,7 +42,10 @@
     <ClInclude Include="sb\graphics\AnimatedSprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sb\graphics\BatchRenderer.hpp">
+    <ClInclude Include="sb\graphics\gl\sbgl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sb\memory\MemoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

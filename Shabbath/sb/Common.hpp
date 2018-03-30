@@ -9,6 +9,11 @@
 #include <string>
 #include <memory>
 
+#include <glm\vec2.hpp>
+#include <glm\vec3.hpp>
+#include <glm\vec4.hpp>
+
+
 #define SB_MODULE(mod) namespace sb { namespace mod {
 #define SB_MODULE_END } }
 
